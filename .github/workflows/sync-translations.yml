@@ -39,16 +39,11 @@ jobs:
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
 
-          git checkout main
-          git pull origin main
-
           export BRANCH=i18n/update-translations-${{ github.run_id }}
           git checkout -b $BRANCH
 
           git add locales/language/*.json
           git commit -m "chore: sync translations from POEditor" || echo "No changes to commit"
-
-          git push origin $BRANCH
 
       - name: 📤 Create Pull Request
         uses: peter-evans/create-pull-request@v5

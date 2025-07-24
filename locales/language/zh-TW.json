@@ -1,7 +1,7 @@
 [
     {
         "term": "title",
-        "definition": "Welcome to our app",
+        "definition": "\u6b61\u8fce\u4f7f\u7528\u6211\u5011\u7684\u61c9\u7528\u7a0b\u5f0f",
         "context": "\"home\"",
         "term_plural": "",
         "reference": "",
@@ -10,7 +10,7 @@
     },
     {
         "term": "subtitle",
-        "definition": "Experience the future of productivity",
+        "definition": "\u9ad4\u9a57\u672a\u4f86\u7684\u9ad8\u6548\u5de5\u4f5c\u65b9\u5f0f",
         "context": "\"home\"",
         "term_plural": "",
         "reference": "",
@@ -19,7 +19,7 @@
     },
     {
         "term": "cta",
-        "definition": "Get Started",
+        "definition": "\u7acb\u5373\u958b\u59cb",
         "context": "\"home\"",
         "term_plural": "",
         "reference": "",

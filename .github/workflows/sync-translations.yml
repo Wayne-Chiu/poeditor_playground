@@ -53,6 +53,7 @@ jobs:
       - name: 📤 Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
+          token: ${{ secrets.ACTIONS_PAT }}
           title: "Update translations from POEditor"
           branch: i18n/update-translations-${{ github.run_id }}
           base: main

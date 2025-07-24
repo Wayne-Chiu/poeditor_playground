@@ -38,14 +38,22 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          git checkout -b i18n/update-translations || git checkout i18n/update-translations
-          git add locales/*.json
+
+          # 回到 main 並建立一個唯一的分支（避免重複）
+          git checkout main
+          git pull origin main
+
+          export BRANCH=i18n/update-translations-${{ github.run_id }}
+          git checkout -b $BRANCH
+
+          git add locales/language/*.json
           git commit -m "chore: sync translations from POEditor" || echo "No changes to commit"
 
       - name: 📤 Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
           title: "Update translations from POEditor"
-          branch: i18n/update-translations
+          branch: i18n/update-translations-${{ github.run_id }}
+          base: main
           body: "This PR updates translations from POEditor."
           commit-message: "chore: sync translations from POEditor"

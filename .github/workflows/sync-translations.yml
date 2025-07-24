@@ -50,4 +50,3 @@ jobs:
           base: main
           body: "This PR updates translations from POEditor."
           commit-message: "chore: sync translations from POEditor"
-          delete-branch: true

@@ -1,0 +1,51 @@
+name: Sync Translations from POEditor
+
+on:
+  workflow_dispatch:
+
+jobs:
+  sync-i18n:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout repository
+        uses: actions/checkout@v3
+
+      - name: 📥 Download translations from POEditor
+        env:
+          POEDITOR_API_TOKEN: ${{ secrets.POEDITOR_API_TOKEN }}
+          POEDITOR_PROJECT_ID: ${{ secrets.POEDITOR_PROJECT_ID }}
+        run: |
+          mkdir -p locales/language
+          
+          # zh-TW
+          curl -s -X POST https://api.poeditor.com/v2/projects/export \
+            -d api_token=$POEDITOR_API_TOKEN \
+            -d id=$POEDITOR_PROJECT_ID \
+            -d language=zh-TW \
+            -d type=json \
+          | jq -r '.result.url' | xargs curl -o locales/language/zh-TW.json
+          
+          # en
+          curl -s -X POST https://api.poeditor.com/v2/projects/export \
+            -d api_token=$POEDITOR_API_TOKEN \
+            -d id=$POEDITOR_PROJECT_ID \
+            -d language=en-us \
+            -d type=json \
+          | jq -r '.result.url' | xargs curl -o locales/language/en.json
+
+      - name: 📝 Commit translation files
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git checkout -b i18n/update-translations || git checkout i18n/update-translations
+          git add locales/*.json
+          git commit -m "chore: sync translations from POEditor" || echo "No changes to commit"
+
+      - name: 📤 Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          title: "Update translations from POEditor"
+          branch: i18n/update-translations
+          body: "This PR updates translations from POEditor."
+          commit-message: "chore: sync translations from POEditor"

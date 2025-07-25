@@ -3,5 +3,11 @@
     "title": "Welcome to our app",
     "subtitle": "Experience the future of productivity",
     "cta": "Get Started"
+  },
+  "login": {
+    "email": "Email Address",
+    "password": "Password",
+    "submit": "Log In",
+    "forgot": "Forgot your password?"
   }
 }

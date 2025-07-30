@@ -2,12 +2,15 @@
   "home": {
     "title": "Welcome to our app",
     "subtitle": "Experience the future of productivity",
-    "cta": "Get Started"
+    "cta": "Sign up"
   },
   "login": {
-    "email": "Email Address",
     "password": "Password",
     "submit": "Log In",
-    "forgot": "Forgot your password?"
+    "emailAccount": "Email Address"
+  },
+  "sidebar": {
+    "story": "About us",
+    "contact": "Contact us"
   }
 }
